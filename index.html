@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Does Packer support HCL?</title>
+
+    <style type="text/css">
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+        h1, h2 {
+            display: block;
+        }
+
+    </style>
+
+    <script>
+        fetch('https://api.github.com/repos/hashicorp/packer/issues/1768')
+        .then(
+            function(response) {
+            if (response.status !== 200) {
+                console.log('Looks like there was a problem. Status Code: ' +
+                response.status);
+                return;
+            }
+
+            response.json().then(function(data) {
+                console.log(data.state)
+
+                switch(data.state) {
+                    case "open":
+                        hcl = "No."
+                        break;
+                    case "closed":
+                        hcl = "Yes!"
+                        break;
+                    default:
+                        hcl = "Maybe."
+                }
+                document.querySelectorAll("h2")[0].textContent = hcl;
+            });
+            }
+        )
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        });
+    </script>
+</head>
+<body>
+    <section>
+        <h1>Does Packer support HCL?</h1>
+        <h2></h2>
+    </section>
+</body>
+</html>
